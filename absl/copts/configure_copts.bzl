@@ -27,6 +27,9 @@ ABSL_DEFAULT_COPTS = select({
     "//absl:clang_compiler": ABSL_LLVM_FLAGS,
     "//absl:gcc_compiler": ABSL_GCC_FLAGS,
     "//conditions:default": ABSL_GCC_FLAGS,
+}) + select({
+    "//absl:config_use_dlls": ["/DABSL_BUILD_DLL"],
+    "//conditions:default": []
 })
 
 ABSL_TEST_COPTS = select({

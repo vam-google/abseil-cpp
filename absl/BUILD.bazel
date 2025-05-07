@@ -15,10 +15,25 @@
 #
 
 load("@bazel_skylib//lib:selects.bzl", "selects")
+load("@bazel_skylib//rules:common_settings.bzl", "bool_flag")
 
 package(default_visibility = ["//visibility:public"])
 
 licenses(["notice"])
+
+bool_flag(
+    name = "use_dlls",
+    build_setting_default = False,
+    visibility = ["//visibility:public"],
+)
+
+config_setting(
+    name = "config_use_dlls",
+    flag_values = {
+        ":use_dlls": "True",
+    },
+    visibility = [":__subpackages__"],
+)
 
 config_setting(
     name = "clang_compiler",
